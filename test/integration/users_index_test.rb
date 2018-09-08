@@ -14,9 +14,20 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     assert_select 'div.pagination'
     first_page_of_users = User.paginate(page: 1)
     first_page_of_users.each do |user|
-      assert_select 'a[href=?]', user_path(user), text: user.name
-      unless user == @admin
-        assert_select 'a[href=?]', user_path(user), text: 'delete'
+      if user.activated?
+        assert_select 'a[href=?]', user_path(user), text: user.name
+        unless user == @admin
+          assert_select 'a[href=?]', user_path(user), text: 'delete'
+        end
+        get user_path(user)
+        assert_template 'users/show'
+        get users_path
+      else
+        assert_select 'a[href=?]', user_path(user), count: 0 , text: user.name
+        get user_path(user)
+        follow_redirect!
+        assert_template root_path 
+        get users_path
       end
     end
     assert_difference 'User.count', -1 do
