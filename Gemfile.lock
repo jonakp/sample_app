@@ -170,7 +170,7 @@ GEM
       multi_json (~> 1.10)
     fog-local (0.6.0)
       fog-core (>= 1.27, < 3.0)
-    fog-openstack (0.2.3)
+    fog-openstack (0.2.4)
       fog-core (~> 1.45.0)
       fog-json (>= 1.0)
       ipaddress (>= 0.8)
@@ -276,7 +276,7 @@ GEM
     mini_magick (4.7.0)
     mini_mime (1.0.1)
     mini_portile2 (2.3.0)
-    minitest (5.11.3)
+    minitest (5.10.3)
     minitest-reporters (1.1.14)
       ansi
       builder
@@ -414,6 +414,7 @@ DEPENDENCIES
   jquery-rails (= 4.3.1)
   listen (= 3.1.5)
   mini_magick (= 4.7.0)
+  minitest (= 5.10.3)
   minitest-reporters (= 1.1.14)
   pg (= 0.20.0)
   puma (= 3.9.1)

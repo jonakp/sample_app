@@ -7,6 +7,15 @@ class UserProfileTest < ActionDispatch::IntegrationTest
     @user = users(:michael)
   end
 
+  test "stats check" do
+    log_in_as(@user)
+    get root_path
+    assert_template 'static_pages/home'
+    assert_select 'a[href=?]', following_user_path(@user)
+    assert_select 'a[href=?]', followers_user_path(@user)
+    assert_match @user.followers.count.to_s, response.body
+  end
+
   test "profile display" do
     get user_path(@user)
     assert_template 'users/show'
